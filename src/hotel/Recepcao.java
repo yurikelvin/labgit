@@ -13,7 +13,7 @@ public class Recepcao {
 	}
 	
 	public void checkIn(String nome, String tipo, int idade, int dias, double valor) {
-		estadias.add(new Estadia(nome, tipo, idade, valor, dias));
+		estadias.add(new Estadia(nome, tipo, idade, dias, valor));
 	}
 	
 	public void checkOut(String nome) {
@@ -32,9 +32,12 @@ public class Recepcao {
 	}
 	
 	public double getLucroTotal() {
-		double soma = 1;
-		for(Estadia estadia: estadias) {
-			soma += estadia.getValor() * estadia.getDias();
+		double soma = 0;
+		Iterator<Estadia> it = estadias.iterator();
+		while(it.hasNext()) {
+			Estadia estadiaPesquisada = it.next();
+			double valorAtual = estadiaPesquisada.getValor() * estadiaPesquisada.getDias();
+			soma += valorAtual;
 		}
 		
 		return soma;
